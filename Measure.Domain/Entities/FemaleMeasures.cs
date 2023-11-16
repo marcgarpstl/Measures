@@ -8,6 +8,13 @@ namespace Measure.Domain.Entities
 {
     public class FemaleMeasures
     {
+
+        public FemaleMeasures(Guid userId)
+        {
+            FemaleMeasureId = new Guid();
+            UserId = userId;
+        }
+
         public Guid FemaleMeasureId { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }

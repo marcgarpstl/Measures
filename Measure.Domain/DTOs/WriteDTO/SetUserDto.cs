@@ -6,5 +6,9 @@ using System.Threading.Tasks;
 
 namespace Measure.Domain.DTOs.WriteDTO
 {
-    public record SetUserDto(string FirstName, string LastName, string Email, string Password, string UserName);
+    public record SetUserDto(string FirstName,
+        string LastName,
+        string Email,
+        string Password,
+        string UserName);
 }

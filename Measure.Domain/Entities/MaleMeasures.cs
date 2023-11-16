@@ -8,7 +8,13 @@ namespace Measure.Domain.Entities
 {
     public class MaleMeasures
     {
-        public Guid MaleMEasureId { get; set; }
+        public MaleMeasures(Guid userId)
+        {
+            MaleMeasureId = new Guid();
+            UserId = userId;
+        }
+
+        public Guid MaleMeasureId { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
         public int Chest { get; set; } // Bröst
