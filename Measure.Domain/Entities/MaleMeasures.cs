@@ -8,6 +8,9 @@ namespace Measure.Domain.Entities
 {
     public class MaleMeasures
     {
+        public Guid MaleMEasureId { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
         public int Chest { get; set; } // Bröst
         public int Waist { get; set; } // Midja
         public int Neck { get; set; } // Nacke

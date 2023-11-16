@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Measure.Domain.DTOs.WriteDTO
 {
-    internal class SetFemaleMeasuresDto
-    {
-    }
+    public record SetFemaleMeasuresDto(int Bust, int Waist, int Hip, int NapeWaist, int FrontRise, int UnderBust, int MidShoulderBust, int ShoulderLength, int Wrist, int Biceps, int CrotchAnkle, int Thigh, int FootLength);
+
 }
