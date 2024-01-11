@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Measure.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace Measure.Infrastructure.Context
 {
     public class UserDbContext : DbContext, IUserDbContext
     {
+        public DbSet<User> User { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

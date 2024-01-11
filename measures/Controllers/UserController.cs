@@ -39,7 +39,7 @@ namespace Measures.Controllers
             }
             catch (OperationCanceledException) when (ct.IsCancellationRequested)
             {
-                return StatusCode(204, "Request cancelled");
+                return StatusCode(499, "Request cancelled");
             }
             catch (Exception)
             {
@@ -47,16 +47,54 @@ namespace Measures.Controllers
             }
         }
 
-        [HttpPut("update-user")]
-        public async Task<IActionResult> UpdateUser()
+        [HttpPut("change-email")]
+        public async Task<IActionResult> ChangeEmail(Guid guid, string email, CancellationToken ct = default)
         {
-            return Ok();
+            try
+            {
+                await _userService.ChangeEmail(guid, email, ct);
+                return Ok();
+            }
+            catch(ArgumentException)
+            {
+                return BadRequest();
+            }
+            catch(OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                return StatusCode(499);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
         }
 
+        [HttpPut("change-password")]
+        public async Task<IActionResult> ChangePassword(Guid guid, string password, CancellationToken ct = default)
+        {
+            try
+            {
+                await _userService.ChangePassword(guid, password, ct);
+                return Ok();
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                return StatusCode(499);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+        }
         [HttpDelete("delete-user")]
         public async Task<IActionResult> DeleteUser()
         {
             return Ok();
+
         }
     }
 }

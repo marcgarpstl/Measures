@@ -27,5 +27,33 @@ namespace Measure.Domain.Services
             User createUser = user.ToUser();
             await _userRepository.AddUserAsync(createUser, ct);
         }
+
+        public async Task ChangeEmail(Guid id, string email, CancellationToken ct = default)
+        {
+            if (id == Guid.Empty || string.IsNullOrEmpty(email)) throw new ArgumentNullException("Id or Email can not be null");
+
+            var user = await _userRepository.GetUserByGuid(id);
+
+            if(user is null) throw new ArgumentNullException("No user found");
+
+            user.Email = email;
+
+            await _userRepository.ChangeEmail(user);
+            //await _iUnitOfWork.SaveChangesAsync();
+        }
+
+        public async Task ChangePassword(Guid id, string password, CancellationToken ct = default)
+        {
+            if (id == Guid.Empty || string.IsNullOrEmpty (password)) throw new ArgumentNullException("Id or password can not be null");
+
+            var user = await _userRepository.GetUserByGuid(id);
+
+            if (user is null) throw new ArgumentNullException("No user found");
+
+            user.Password = password;
+
+            await _userRepository.ChangePassword(user);
+            //await _iUnitOfWork.SaveChangesAsync();
+        }
     }
 }
