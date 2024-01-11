@@ -17,8 +17,8 @@ namespace Measure.Domain.Entities
         public string Password { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
 
-        public MaleMeasures Male {  get; set; }
-        public FemaleMeasures Female { get; set; }
+        public MaleMeasures? Male {  get; set; }
+        public FemaleMeasures? Female { get; set; }
 
         public User(string firstName, string lastName, string email, string password, string userName)
         {

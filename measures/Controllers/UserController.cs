@@ -26,16 +26,24 @@ namespace Measures.Controllers
         {
             if (userDto == null)
             {
-                return BadRequest("User info cannot be null");
-            }
+                throw new ArgumentNullException(nameof(userDto));
+            } 
             try
             {
                 await _userService.AddUserAsync(userDto, ct);
-                return Ok();
-            }
-            catch
-            {
                 return BadRequest();
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest("Invalid argument");
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                return StatusCode(204, "Request cancelled");
+            }
+            catch (Exception)
+            {
+                return StatusCode(406, "Something went wrong");
             }
         }
 

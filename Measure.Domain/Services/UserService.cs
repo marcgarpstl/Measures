@@ -13,12 +13,12 @@ namespace Measure.Domain.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        //private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _unitOfWork = unitOfWork;
+            //_unitOfWork = unitOfWork;
         }
         public async Task AddUserAsync(SetUserDto user, CancellationToken ct = default)
         {

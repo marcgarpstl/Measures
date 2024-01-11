@@ -15,7 +15,6 @@ namespace Measure.Infrastructure.Repository
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
-            await 
         }
     }
 }
