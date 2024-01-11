@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Measure.Domain.DTOs.WriteDTO;
+using Measure.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Measures.Controllers
 {
@@ -6,6 +8,13 @@ namespace Measures.Controllers
     [ApiController]
     public class userController : ControllerBase
     {
+        private readonly IUserService _userService;
+
+        public userController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet("all-users")]
         public async Task<IActionResult> GetUsers()
         {
@@ -13,9 +22,21 @@ namespace Measures.Controllers
         }
 
         [HttpPost("add-user")]
-        public async Task<IActionResult> AddUser()
+        public async Task<IActionResult> AddUser(SetUserDto userDto, CancellationToken ct = default)
         {
-            return Ok();
+            if (userDto == null)
+            {
+                return BadRequest("User info cannot be null");
+            }
+            try
+            {
+                await _userService.AddUserAsync(userDto, ct);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("update-user")]
