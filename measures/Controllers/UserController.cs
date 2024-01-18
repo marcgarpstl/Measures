@@ -15,10 +15,13 @@ namespace Measures.Controllers
             _userService = userService;
         }
 
-        [HttpGet("all-users")]
-        public async Task<IActionResult> GetUsers()
+        [HttpGet("get-user")]
+        public async Task<IActionResult> GetUsers(Guid id, CancellationToken ct = default)
         {
-            return Ok();
+            if(id == Guid.Empty) return BadRequest("Id is empty");
+
+            var user = await _userService.GetById(id);
+            return Ok(user);
         }
 
         [HttpPost("add-user")]
@@ -91,9 +94,26 @@ namespace Measures.Controllers
             }
         }
         [HttpDelete("delete-user")]
-        public async Task<IActionResult> DeleteUser()
+        public async Task<IActionResult> DeleteUser(Guid id, CancellationToken ct = default)
         {
-            return Ok();
+            try
+            {
+                await _userService.DeleteUser(id, ct);
+                return Ok();
+            }
+            catch (ArgumentException)
+            {
+                return BadRequest();
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                return StatusCode(499);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500);
+            }
+
 
         }
     }

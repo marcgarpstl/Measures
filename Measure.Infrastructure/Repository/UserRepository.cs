@@ -16,31 +16,44 @@ namespace Measure.Infrastructure.Repository
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
+            await context.User.AddAsync(user, ct);
         }
 
-        public Task ChangeEmail(User user)
+        public async Task ChangeEmailAsync(User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException();
             }
-            return Task.CompletedTask;
-            //await Task.FromResult(context.Users.Update(user));
+            await Task.FromResult(context.User.Update(user));
         }
 
-        public Task ChangePassword(User user)
+        public async Task ChangePasswordAsync(User user)
         {
             if (user == null)
             {
                 throw new ArgumentNullException();
             }
-            return Task.CompletedTask;
-            //await Task.FromResult(context.Users.Update(user));
+            await Task.FromResult(context.User.Update(user));
         }
 
-        public async Task<User> GetUserByGuid(Guid id, CancellationToken ct = default)
+        public async Task DeleteUserAsync(Guid id)
         {
-            
+            if (id ==  Guid.Empty) throw new ArgumentNullException("id is null");
+
+            var user = await GetUserByGuidAsync(id);
+            if (user != null)
+            {
+                throw new InvalidOperationException("Can't do");
+            }
+
+            await Task.FromResult(context.User.Remove(user));
+        }
+
+        public async Task<User> GetUserByGuidAsync(Guid id, CancellationToken ct = default)
+        {
+            if(id == Guid.Empty) throw new ArgumentNullException(nameof(id));
+
             return context.User.FirstOrDefault(u  => u.Id == id);
         }
     }
