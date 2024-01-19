@@ -113,8 +113,6 @@ namespace Measures.Controllers
             {
                 return StatusCode(500);
             }
-
-
         }
     }
 }
