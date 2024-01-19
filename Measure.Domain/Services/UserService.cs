@@ -14,12 +14,12 @@ namespace Measure.Domain.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
-        //private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
-            //_unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
         public async Task AddUserAsync(SetUserDto user, CancellationToken ct = default)
         {
@@ -40,7 +40,7 @@ namespace Measure.Domain.Services
             user.Email = email;
 
             await _userRepository.ChangeEmailAsync(user);
-            //await _iUnitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task ChangePassword(Guid id, string password, CancellationToken ct = default)
@@ -54,7 +54,7 @@ namespace Measure.Domain.Services
             user.Password = password;
 
             await _userRepository.ChangePasswordAsync(user);
-            //await _iUnitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task DeleteUser(Guid id, CancellationToken ct = default)
@@ -62,7 +62,7 @@ namespace Measure.Domain.Services
             if (id == Guid.Empty) throw new ArgumentNullException("Not null");
 
             await _userRepository.DeleteUserAsync(id);
-            //await _iUnitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<ReadUserDto> GetById(Guid id, CancellationToken ct = default)

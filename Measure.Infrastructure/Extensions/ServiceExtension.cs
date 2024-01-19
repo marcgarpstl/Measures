@@ -1,5 +1,6 @@
 ﻿using Measure.Domain.Repositories;
 using Measure.Domain.Services;
+using Measure.Infrastructure.Context;
 using Measure.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,8 +15,10 @@ namespace Measure.Infrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
+            services.AddDbContext<IUserDbContext, UserDbContext>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }
