@@ -1,5 +1,4 @@
 using Measures;
-
 namespace measures
 {
     public class Program
