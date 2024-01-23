@@ -1,6 +1,9 @@
-﻿using Measure.Domain.DTOs.WriteDTO;
+﻿using FluentValidation;
+using Measure.Domain.DTOs.WriteDTO;
 using Measure.Domain.Services;
+using Measure.Domain.Validators;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Measures.Controllers
 {
@@ -9,10 +12,12 @@ namespace Measures.Controllers
     public class userController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IUserValidator _userValidator;
 
-        public userController(IUserService userService)
+        public userController(IUserService userService, IUserValidator userValidator)
         {
             _userService = userService;
+            _userValidator = userValidator;
         }
 
         [HttpGet("get-user")]
@@ -33,8 +38,13 @@ namespace Measures.Controllers
             } 
             try
             {
+                var validationResult = _userValidator.Validating(userDto);
+
+                if (validationResult != ValidationResult.Success) { return BadRequest(validationResult); }
+
                 await _userService.AddUserAsync(userDto, ct);
-                return BadRequest();
+
+                return Ok("User added successfully");
             }
             catch (ArgumentException)
             {
@@ -46,7 +56,7 @@ namespace Measures.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(406, "Something went wrong");
+                return StatusCode(500);
             }
         }
 
