@@ -17,24 +17,15 @@ namespace Measure.Domain.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserValidator _userValidator;
 
-        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, IUserValidator userValidator)
+        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
-            _userValidator = userValidator;
         }
         public async Task AddUserAsync(SetUserDto user, CancellationToken ct = default)
         {
             if (user == null) throw new ArgumentNullException();
-
-            //var result = _userValidator.Validating(user);
-
-            //if (result != ValidationResult.Success)
-            //{
-            //    throw new ValidationException(result.ErrorMessage);
-            //}
 
             User createUser = user.ToUser();
             await _userRepository.AddUserAsync(createUser, ct);

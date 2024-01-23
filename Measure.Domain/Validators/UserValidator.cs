@@ -64,8 +64,6 @@ namespace Measures.Validators
                     return new ValidationResult (validationErrors);
                 }
             }
-
-
             return ValidationResult.Success;
         }
     }
