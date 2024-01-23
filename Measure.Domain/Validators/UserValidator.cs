@@ -1,14 +1,18 @@
 ﻿using FluentValidation;
 using Measure.Domain.DTOs.WriteDTO;
+using Measure.Domain.Validators;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.ExceptionServices;
 using System.Text.RegularExpressions;
 
 namespace Measures.Validators
 {
-    public class UserValidator : AbstractValidator<SetUserDto>
+    public class UserValidator : AbstractValidator<SetUserDto>, IUserValidator
     {
         public UserValidator()
         {
-            RuleFor(u => u.FirstName).Cascade(CascadeMode.Stop)
+            RuleFor(u => u.FirstName)
+                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Name cannot be empty or whitespace.")
                 .MinimumLength(2).WithMessage("Name must be atleast 2 characters.")
                 .MaximumLength(50).WithMessage("Name cannot exceed 50 character.");
@@ -42,6 +46,27 @@ namespace Measures.Validators
                 .MinimumLength(2).WithMessage("Username must be atleast 2 characters.")
                 .MaximumLength(50).WithMessage("Username cannot exceed 50 character.");
 
+        }
+
+        public ValidationResult Validating(SetUserDto user)
+        {
+
+            var validator = new UserValidator();
+
+            var result = validator.Validate(user);
+
+            if (!result.IsValid)
+            {
+                foreach(var failure in result.Errors)
+                {
+                    var validationErrors = result.ToString("~");
+
+                    return new ValidationResult (validationErrors);
+                }
+            }
+
+
+            return ValidationResult.Success;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Measure.Infrastructure.Context
 {
     public class UserDbContext : DbContext, IUserDbContext
     {
-        public DbSet<User> User { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DbSet<User> User {  get; set; }
 
         public override Task<int>SaveChangesAsync(CancellationToken ct = default)
         {
