@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Measure.Domain.Services
 {
-    internal class FemaleMeasureService
+    public class FemaleMeasureService
     {
     }
 }

@@ -77,7 +77,7 @@ namespace Measure.Domain.Services
 
             else if (ct.IsCancellationRequested) throw new OperationCanceledException();
 
-            return user.ToUserDo();
+            return user.ToUserDto();
         }
     }
 }

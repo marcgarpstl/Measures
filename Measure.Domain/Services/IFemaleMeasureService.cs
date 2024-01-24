@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Measure.Domain.Services
 {
-    internal interface IFemaleMeasureService
+    public interface IFemaleMeasureService
     {
     }
 }
