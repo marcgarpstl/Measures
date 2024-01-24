@@ -25,7 +25,7 @@ namespace Measure.Domain.Services
         }
         public async Task AddUserAsync(SetUserDto user, CancellationToken ct = default)
         {
-            if (user == null) throw new ArgumentNullException();
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
             User createUser = user.ToUser();
             await _userRepository.AddUserAsync(createUser, ct);

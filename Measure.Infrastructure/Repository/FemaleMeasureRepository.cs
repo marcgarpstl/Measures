@@ -1,5 +1,7 @@
 ﻿using Measure.Domain.Entities;
 using Measure.Domain.Repositories;
+using Measure.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,12 @@ namespace Measure.Infrastructure.Repository
 {
     public class FemaleMeasureRepository : IFemaleMeasureRepository
     {
-        public Task AddMeasureFemaleAsync(User user, CancellationToken ct = default)
+        private readonly IUserDbContext _context;
+        public async Task AddMeasureFemaleAsync(FemaleMeasures female, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            if (female == null) throw new ArgumentNullException(nameof(female));
+
+            await _context.Female.AddAsync(female, ct);
         }
 
         public Task DeleteMeasureFemaleAsync(User user)
@@ -25,7 +30,7 @@ namespace Measure.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task UpdateMeasuresAsync(FemaleMeasures measures)
+        public Task UpdateMeasuresAsync(FemaleMeasures female)
         {
             throw new NotImplementedException();
         }

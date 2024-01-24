@@ -1,4 +1,5 @@
-﻿using Measure.Domain.Repositories;
+﻿using Measure.Domain.DTOs.WriteDTO;
+using Measure.Domain.Repositories;
 using Measure.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,9 +30,17 @@ namespace Measures.Controllers
         }
 
         [HttpPost("add-measures")]
-        public async Task<IActionResult> AddFemaleMeasures()
+        public async Task<IActionResult> AddFemaleMeasures(Guid id, SetFemaleMeasuresDto female, CancellationToken ct = default)
         {
-            return Ok();
+            if (id == null) throw new ArgumentNullException(nameof(id));
+
+            if (female == null) throw new ArgumentNullException(nameof(female));
+
+            var user = await _userRepository.GetUserByGuidAsync(id, ct);
+            
+            user.Female = await _femaleMeasureService.AddFemaleMeasureAsync(id, female, ct);
+
+            return Ok("Female measures added.");
         }
 
         [HttpPut("update-measures")]

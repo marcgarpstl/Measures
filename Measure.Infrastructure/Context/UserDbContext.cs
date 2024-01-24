@@ -11,7 +11,7 @@ namespace Measure.Infrastructure.Context
     public class UserDbContext : DbContext, IUserDbContext
     {
         public DbSet<User> User {  get; set; }
-
+        public DbSet<FemaleMeasures> Female {  get; set; }
         public override Task<int>SaveChangesAsync(CancellationToken ct = default)
         {
             PreSaveChanges();
