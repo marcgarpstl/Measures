@@ -11,7 +11,6 @@ namespace Measures.Controllers
     {
         private readonly IFemaleMeasureService _femaleMeasureService;
         private readonly IUserRepository _userRepository;
-        private readonly ILogger _logger;
 
         public femaleController(IFemaleMeasureService femaleMeasureService, IUserRepository userRepository)
         {
@@ -55,7 +54,6 @@ namespace Measures.Controllers
             }
             catch (Exception ex) 
             {
-                _logger.LogError(ex, "This is my error.");
                 return StatusCode(500);
             }
             
