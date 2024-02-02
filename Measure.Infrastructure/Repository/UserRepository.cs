@@ -54,7 +54,9 @@ namespace Measure.Infrastructure.Repository
         {
             if(id == Guid.Empty) throw new ArgumentNullException(nameof(id));
 
-            return _context.User.FirstOrDefault(u  => u.Id == id);
+            var foundUser = _context.User.FirstOrDefault(u => u.Id == id);
+
+            return foundUser;
         }
     }
 }

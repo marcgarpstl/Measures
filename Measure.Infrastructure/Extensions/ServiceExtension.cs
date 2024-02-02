@@ -18,6 +18,7 @@ namespace Measure.Infrastructure.Extensions
             services.AddDbContext<IUserDbContext, UserDbContext>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IFemaleMeasureRepository, FemaleMeasureRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             return services;
         }

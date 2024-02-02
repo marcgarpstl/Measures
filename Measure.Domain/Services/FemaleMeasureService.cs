@@ -21,12 +21,14 @@ namespace Measure.Domain.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task AddFemaleMeasureAsync(Guid id, SetFemaleMeasuresDto femaleMeasures, CancellationToken ct = default)
+        public async Task<FemaleMeasures> AddFemaleMeasureAsync(Guid id, SetFemaleMeasuresDto femaleMeasures, CancellationToken ct = default)
         {
             if (femaleMeasures == null) throw new ArgumentNullException(nameof(femaleMeasures));
 
             FemaleMeasures addMeasures = femaleMeasures.ToFemaleMeasures();
             await _femaleRepository.AddMeasureFemaleAsync(addMeasures, ct);
+
+            return addMeasures;
         }
 
         public Task DeleteFemaleMeasureAsync(Guid id, CancellationToken ct = default)

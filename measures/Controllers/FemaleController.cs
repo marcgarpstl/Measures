@@ -11,6 +11,7 @@ namespace Measures.Controllers
     {
         private readonly IFemaleMeasureService _femaleMeasureService;
         private readonly IUserRepository _userRepository;
+        private readonly ILogger _logger;
 
         public femaleController(IFemaleMeasureService femaleMeasureService, IUserRepository userRepository)
         {
@@ -32,15 +33,32 @@ namespace Measures.Controllers
         [HttpPost("add-measures")]
         public async Task<IActionResult> AddFemaleMeasures(Guid id, SetFemaleMeasuresDto female, CancellationToken ct = default)
         {
-            if (id == null) throw new ArgumentNullException(nameof(id));
-
             if (female == null) throw new ArgumentNullException(nameof(female));
 
-            var user = await _userRepository.GetUserByGuidAsync(id, ct);
-            
-            user.Female = await _femaleMeasureService.AddFemaleMeasureAsync(id, female, ct);
+            try
+            {
+                var user = await _userRepository.GetUserByGuidAsync(id, ct);
 
-            return Ok("Female measures added.");
+                if (user == null) return BadRequest("No user found.");
+
+                user.Female = await _femaleMeasureService.AddFemaleMeasureAsync(id, female, ct);
+
+                return Ok("Female measures added.");
+            }
+            catch(ArgumentException)
+            {
+                return BadRequest("Invalid argument.");
+            }
+            catch(OperationCanceledException) when (ct.IsCancellationRequested) 
+            {
+                return StatusCode(499, "Request cancelled.");
+            }
+            catch (Exception ex) 
+            {
+                _logger.LogError(ex, "This is my error.");
+                return StatusCode(500);
+            }
+            
         }
 
         [HttpPut("update-measures")]

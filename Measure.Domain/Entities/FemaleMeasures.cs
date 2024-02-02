@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,13 +9,6 @@ namespace Measure.Domain.Entities
 {
     public class FemaleMeasures
     {
-        public FemaleMeasures() { }
-
-        public FemaleMeasures(Guid userId)
-        {
-            FemaleMeasureId = new Guid();
-            UserId = userId;
-        }
 
         public Guid FemaleMeasureId { get; set; }
         public Guid UserId { get; set; }
@@ -50,5 +44,25 @@ namespace Measure.Domain.Entities
         /// Rings
         /// </summary>
         public int FingerCircumference { get; set; } // Fingeromkrets
+
+        public FemaleMeasures(Guid userId, int bust, int waist, int hip, int armLenght, int legLenght, int underBust, int breastVolume, int footLenght, int footWidth, int calf, int handCircumference, int headCircumference, int fingerCircumference)
+        {
+            FemaleMeasureId = new Guid();
+            UserId = userId;
+            Bust = bust;
+            Waist = waist;
+            Hip = hip;
+            ArmLenght = armLenght;
+            LegLenght = legLenght;
+            UnderBust = underBust;
+            BreastVolume = breastVolume;
+            FootLength = footLenght;
+            FootWidth = footWidth;
+            HandCircumference = handCircumference;
+            HeadCircumference = headCircumference;
+            FingerCircumference = fingerCircumference;
+        }
     }
+
+
 }

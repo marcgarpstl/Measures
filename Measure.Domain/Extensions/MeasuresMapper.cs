@@ -13,9 +13,9 @@ namespace Measure.Domain.Extensions
 {
     internal static class MeasuresMapper
     {
-        internal static ReadFemaleMeasuresDto ToFemaleDto(this ReadFemaleMeasuresDto rfd) =>
+        internal static ReadFemaleMeasuresDto ToFemaleDto(this FemaleMeasures rfd) =>
             new ReadFemaleMeasuresDto(
-                rfd.Id,
+                rfd.FemaleMeasureId,
                 rfd.UserId,
                 rfd.Bust,
                 rfd.Waist,
@@ -24,15 +24,29 @@ namespace Measure.Domain.Extensions
                 rfd.LegLenght, 
                 rfd.UnderBust, 
                 rfd.BreastVolume, 
-                rfd.FootLenght, 
-                rfd.FootWitdh, 
+                rfd.FootLength, 
+                rfd.FootWidth, 
                 rfd.Calf, 
                 rfd.HandCircumference, 
                 rfd.HeadCircumference, 
                 rfd.FingerCircumference);
 
         internal static FemaleMeasures ToFemaleMeasures(this SetFemaleMeasuresDto sfd) =>
-            new FemaleMeasures(sfd.UserId);
+            new FemaleMeasures(
+                sfd.UserId,
+                sfd.Bust,
+                sfd.Waist,
+                sfd.Hip,
+                sfd.ArmLenght,
+                sfd.LegLenght,
+                sfd.UnderBust,
+                sfd.BreastVolume,
+                sfd.FootLenght,
+                sfd.FootWitdh,
+                sfd.Calf,
+                sfd.HandCircumference,
+                sfd.HeadCircumference,
+                sfd.FingerCircumference);
 
         internal static ReadMaleMeasuresDto ToMaleDto(this ReadMaleMeasuresDto rmd) =>
             new ReadMaleMeasuresDto(
