@@ -2,6 +2,7 @@
 using Measure.Domain.Services;
 using Measure.Infrastructure.Context;
 using Measure.Infrastructure.Repository;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace Measure.Infrastructure.Extensions
 {
     public static class ServiceExtension
     {
-        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<IUserDbContext, UserDbContext>();
+            services.AddDbContext<IUserDbContext, UserDbContext>(options => options.UseSqlServer(connectionString));
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();

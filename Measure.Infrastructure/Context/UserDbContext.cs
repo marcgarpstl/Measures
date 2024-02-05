@@ -12,6 +12,20 @@ namespace Measure.Infrastructure.Context
     {
         public DbSet<User> User {  get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("MARC");
+            }
+        }
+
+        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
+
         public override Task<int>SaveChangesAsync(CancellationToken ct = default)
         {
             PreSaveChanges();
