@@ -12,11 +12,15 @@ namespace Measure.Infrastructure.Repository
     public class UserRepository : IUserRepository
     {
         private readonly IUserDbContext _context;
+        public UserRepository(IUserDbContext context)
+        {
+            this._context = context;
+        }
         public async Task AddUserAsync(User user, CancellationToken ct = default)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
-            await _context.User.AddAsync(user, ct);
+            await _context.Users.AddAsync(user, ct);
         }
 
         public async Task ChangeEmailAsync(User user)
@@ -25,7 +29,7 @@ namespace Measure.Infrastructure.Repository
             {
                 throw new ArgumentNullException();
             }
-            await Task.FromResult(_context.User.Update(user));
+            await Task.FromResult(_context.Users.Update(user));
         }
 
         public async Task ChangePasswordAsync(User user)
@@ -34,7 +38,7 @@ namespace Measure.Infrastructure.Repository
             {
                 throw new ArgumentNullException();
             }
-            await Task.FromResult(_context.User.Update(user));
+            await Task.FromResult(_context.Users.Update(user));
         }
 
         public async Task DeleteUserAsync(Guid id)
@@ -47,16 +51,14 @@ namespace Measure.Infrastructure.Repository
                 throw new InvalidOperationException("Can't do");
             }
 
-            await Task.FromResult(_context.User.Remove(user));
+            await Task.FromResult(_context.Users.Remove(user));
         }
 
         public async Task<User> GetUserByGuidAsync(Guid id, CancellationToken ct = default)
         {
             if(id == Guid.Empty) throw new ArgumentNullException(nameof(id));
 
-            var foundUser = _context.User.FirstOrDefault(u => u.Id == id);
-
-            return foundUser;
+            return _context.Users.FirstOrDefault(u  => u.Id == id);
         }
     }
 }
