@@ -40,7 +40,7 @@ namespace Measures.Controllers
 
                 if (user == null) return BadRequest("No user found.");
 
-                user.Female = await _femaleMeasureService.AddFemaleMeasureAsync(id, female, ct);
+                user.Female = await _femaleMeasureService.AddFemaleMeasureAsync(female, ct);
 
                 return Ok("Female measures added.");
             }

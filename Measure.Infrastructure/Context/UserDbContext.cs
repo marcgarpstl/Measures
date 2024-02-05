@@ -11,7 +11,22 @@ namespace Measure.Infrastructure.Context
     public class UserDbContext : DbContext, IUserDbContext
     {
         public DbSet<User> User {  get; set; }
-        public DbSet<FemaleMeasures> Female {  get; set; }
+        public DbSet<FemaleMeasures> FemaleMeasures { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("MARC");
+        //    }
+        //}
+
+        public UserDbContext(DbContextOptions<UserDbContext> options) : base(options) { }
+
         public override Task<int>SaveChangesAsync(CancellationToken ct = default)
         {
             PreSaveChanges();

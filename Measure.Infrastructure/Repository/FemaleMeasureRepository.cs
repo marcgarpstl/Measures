@@ -17,7 +17,7 @@ namespace Measure.Infrastructure.Repository
         {
             if (female == null) throw new ArgumentNullException(nameof(female));
 
-            await _context.Female.AddAsync(female, ct);
+            await _context.FemaleMeasures.AddAsync(female, ct);
         }
 
         public Task DeleteMeasureFemaleAsync(User user)
