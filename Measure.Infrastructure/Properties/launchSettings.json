@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Measure.Infrastructure": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ConnectionString": "MARC"
+      }
+    }
+  }
+}

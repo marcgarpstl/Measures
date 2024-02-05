@@ -10,7 +10,8 @@ namespace Measure.Infrastructure.Context
 {
     public interface IUserDbContext : IDisposable
     {
-        DbSet<User> User { get; set; }
+        DbSet<User> Users { get; set; }
+        DbSet<FemaleMeasures> FemaleMeasures { get; set; }
         Task<int> SaveChangesAsync(CancellationToken ct = default);
     }
 }
