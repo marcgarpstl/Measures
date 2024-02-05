@@ -6,7 +6,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionString": "MARC"
+        "ConnectionString": "Server=MARC;Database=Measure.Test;Trusted_Connection=True;MultipleActiveResultSets=true"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7111;http://localhost:5137"

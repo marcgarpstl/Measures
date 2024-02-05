@@ -29,6 +29,7 @@ namespace Measure.Domain.Services
 
             User createUser = user.ToUser();
             await _userRepository.AddUserAsync(createUser, ct);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task ChangeEmail(Guid id, string email, CancellationToken ct = default)

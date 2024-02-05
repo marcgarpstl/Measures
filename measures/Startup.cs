@@ -2,6 +2,7 @@
 using Measure.Infrastructure.Context;
 using Measure.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 
@@ -9,9 +10,15 @@ namespace Measures
 {
     public class Startup
     {
-        string connectionString = Environment.GetEnvironmentVariable("ConnectionString");
+        private readonly IConfiguration _configuration;
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

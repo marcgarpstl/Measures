@@ -17,7 +17,7 @@ namespace Measure.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<IUserDbContext, UserDbContext>(options => options.UseSqlServer(connectionString));
-            services.AddTransient<IUserService, UserService>();
+            // services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             return services;
