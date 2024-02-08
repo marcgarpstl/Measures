@@ -37,9 +37,17 @@ namespace Measure.Domain.Services
             throw new NotImplementedException();
         }
 
-        public Task<ReadFemaleMeasuresDto> GetFemaleMeasureAsync(Guid id, CancellationToken ct = default)
+        public async Task<ReadFemaleMeasuresDto> GetFemaleMeasureAsync(Guid id, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            if (id == Guid.Empty) throw new ArgumentNullException(nameof(id));
+
+            var userFemale = await _femaleRepository.GetFemaleMeasuresByIdAsync(id);
+
+            if (userFemale == null) throw new ArgumentException(nameof(userFemale));
+
+            else if (ct.IsCancellationRequested) throw new InvalidOperationException();
+
+            return userFemale.Female.ToFemaleDto();
         }
     }
 }

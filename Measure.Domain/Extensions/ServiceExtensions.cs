@@ -10,7 +10,8 @@ namespace Measure.Domain.Extensions
     {
         public static IServiceCollection AddDomainServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IFemaleMeasureService, FemaleMeasureService>();
             services.AddTransient<IUserValidator, UserValidator>();
             return services;
         }

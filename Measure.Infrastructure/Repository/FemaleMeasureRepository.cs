@@ -13,6 +13,10 @@ namespace Measure.Infrastructure.Repository
     public class FemaleMeasureRepository : IFemaleMeasureRepository
     {
         private readonly IUserDbContext _context;
+        public FemaleMeasureRepository(IUserDbContext context)
+        {
+            _context = context;
+        }
         public async Task AddMeasureFemaleAsync(FemaleMeasures female, CancellationToken ct = default)
         {
             if (female == null) throw new ArgumentNullException(nameof(female));

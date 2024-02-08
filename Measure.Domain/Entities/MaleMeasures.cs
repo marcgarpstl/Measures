@@ -9,11 +9,6 @@ namespace Measure.Domain.Entities
 {
     public class MaleMeasures
     {
-        public MaleMeasures(Guid userId)
-        {
-            MaleMeasureId = new Guid();
-            UserId = userId;
-        }
         [Key]
         public Guid MaleMeasureId { get; set; }
         public Guid UserId { get; set; }
@@ -25,7 +20,16 @@ namespace Measure.Domain.Entities
         public int Calf { get; set; } // Vad
         public int Inseam { get; set; } // Fot till skrev
         public int FootLength { get; set; } // Fotlängd
-
+        public MaleMeasures()
+        {
+            MaleMeasureId = new Guid();
+        }
+        public MaleMeasures(Guid userId)
+        {
+            MaleMeasureId = new Guid();
+            UserId = userId;
+        }
 
     }
+    
 }

@@ -26,6 +26,7 @@ namespace Measures.Controllers
             if(id == Guid.Empty) return BadRequest("Id is empty");
 
             var user = await _userService.GetById(id);
+
             return Ok(user);
         }
 

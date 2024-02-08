@@ -10,7 +10,7 @@ namespace Measure.Domain.Entities
 {
     public class FemaleMeasures
     {
-
+        [Key]
         public Guid FemaleMeasureId { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
@@ -45,8 +45,11 @@ namespace Measure.Domain.Entities
         /// Rings
         /// </summary>
         public int FingerCircumference { get; set; } // Fingeromkrets
-
-        public FemaleMeasures(Guid userId, int bust, int waist, int hip, int armLenght, int legLenght, int underBust, int breastVolume, int footLenght, int footWidth, int calf, int handCircumference, int headCircumference, int fingerCircumference)
+        public FemaleMeasures()
+        {
+            
+        }
+        public FemaleMeasures(Guid userId, int bust, int waist, int hip, int armLenght, int legLenght, int underBust, int breastVolume, int footLength, int footWidth, int calf, int handCircumference, int headCircumference, int fingerCircumference)
         {
             FemaleMeasureId = new Guid();
             UserId = userId;
@@ -57,13 +60,12 @@ namespace Measure.Domain.Entities
             LegLenght = legLenght;
             UnderBust = underBust;
             BreastVolume = breastVolume;
-            FootLength = footLenght;
+            FootLength = footLength;
             FootWidth = footWidth;
+            Calf = calf;
             HandCircumference = handCircumference;
             HeadCircumference = headCircumference;
             FingerCircumference = fingerCircumference;
         }
     }
-
-
 }

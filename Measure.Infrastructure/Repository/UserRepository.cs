@@ -46,7 +46,7 @@ namespace Measure.Infrastructure.Repository
             if (id ==  Guid.Empty) throw new ArgumentNullException("id is null");
 
             var user = await GetUserByGuidAsync(id);
-            if (user != null)
+            if (user == null)
             {
                 throw new InvalidOperationException("Can't do");
             }
