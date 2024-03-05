@@ -15,7 +15,6 @@ namespace Measure.Domain.Extensions
     {
         internal static ReadFemaleMeasuresDto ToFemaleDto(this FemaleMeasures rfd) =>
             new ReadFemaleMeasuresDto(
-                rfd.FemaleMeasureId,
                 rfd.UserId,
                 rfd.Bust,
                 rfd.Waist,
@@ -33,7 +32,6 @@ namespace Measure.Domain.Extensions
 
         internal static FemaleMeasures ToFemaleMeasures(this SetFemaleMeasuresDto sfd) =>
             new FemaleMeasures(
-                sfd.UserId,
                 sfd.Bust,
                 sfd.Waist,
                 sfd.Hip,

@@ -18,17 +18,19 @@ namespace Measure.Domain.Entities
         public string Password { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
         public DateTimeOffset Created { get; set; }
+        public MaleMeasures Male { get; set; }
+        public FemaleMeasures Female { get; set; }
 
-        public MaleMeasures? Male { get; set; } = new MaleMeasures();
-        public FemaleMeasures? Female { get; set; } = new FemaleMeasures();
-
-        public User(string firstName, string lastName, string email, string password, string userName)
+        public User(Guid id, string firstName, string lastName, string email, string password, string userName)
         {
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
             UserName = userName;
+            Female = new FemaleMeasures(Id);
+            Male = new MaleMeasures(Id);
             Created = DateTimeOffset.UtcNow;
         }
     }

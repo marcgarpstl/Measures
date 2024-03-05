@@ -28,6 +28,7 @@ namespace Measure.Domain.Services
             FemaleMeasures addMeasures = femaleMeasures.ToFemaleMeasures();
 
             await _femaleRepository.AddMeasureFemaleAsync(addMeasures, ct);
+            await _unitOfWork.SaveChangesAsync(ct);
 
             return addMeasures;
         }

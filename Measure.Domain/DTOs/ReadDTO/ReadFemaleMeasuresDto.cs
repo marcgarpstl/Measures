@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Measure.Domain.DTOs.ReadDTO
 {
-    public record ReadFemaleMeasuresDto(Guid Id,
-        Guid UserId,
+    public record ReadFemaleMeasuresDto(Guid UserId,
         int Bust,
         int Waist,
         int Hip,

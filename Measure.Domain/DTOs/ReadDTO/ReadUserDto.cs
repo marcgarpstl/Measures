@@ -12,10 +12,12 @@ namespace Measure.Domain.DTOs.ReadDTO
         string LastName,
         string Email,
         string Password,
-        string UserName
+        string UserName,
+        FemaleMeasures Female,
+        MaleMeasures Male
         )
     {
-        public ReadUserDto(Guid Id, string FirstName, string LastName, string Email, string Password, string UserName, MaleMeasures? male, FemaleMeasures? female) : this(Id, FirstName, LastName, Email, Password, UserName)
+        public ReadUserDto(Guid Id, string FirstName, string LastName, string Email, string Password, string UserName, MaleMeasures? male, FemaleMeasures? female) : this(Id, FirstName, LastName, Email, Password, UserName, Female: female, Male: male)
         {
             Male = male;
             Female = female;

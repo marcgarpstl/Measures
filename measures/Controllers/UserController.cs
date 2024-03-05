@@ -21,7 +21,7 @@ namespace Measures.Controllers
         }
 
         [HttpGet("get-user")]
-        public async Task<IActionResult> GetUsers(Guid id, CancellationToken ct = default)
+        public async Task<IActionResult> GetUser(Guid id, CancellationToken ct = default)
         {
             if(id == Guid.Empty) return BadRequest("Id is empty");
 
@@ -57,7 +57,7 @@ namespace Measures.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500);
+                return StatusCode(500, "Unknown");
             }
         }
 

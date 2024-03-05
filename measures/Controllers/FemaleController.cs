@@ -34,7 +34,7 @@ namespace Measures.Controllers
             return Ok(user.Female);
         }
 
-        [HttpPost("add-measures")]
+        [HttpPut("add-measures")]
         public async Task<IActionResult> AddFemaleMeasures(Guid id, SetFemaleMeasuresDto female, CancellationToken ct = default)
         {
             if (female == null) throw new ArgumentNullException(nameof(female));

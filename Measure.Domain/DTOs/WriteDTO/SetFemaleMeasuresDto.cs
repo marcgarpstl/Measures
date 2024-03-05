@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Measure.Domain.DTOs.WriteDTO
 {
-    public record SetFemaleMeasuresDto(Guid UserId,
-        int Bust,
+    public record SetFemaleMeasuresDto(int Bust,
         int Waist,
         int Hip,
         int ArmLenght,
