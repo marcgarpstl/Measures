@@ -11,13 +11,11 @@ namespace Measures.Controllers
     public class femaleController : ControllerBase
     {
         private readonly IFemaleMeasureService _femaleMeasureService;
-        private readonly IUnitOfWork _unitOfWork;
         private IUserService _userService;
 
-        public femaleController(IFemaleMeasureService femaleMeasureService, IUnitOfWork unitOfWork, IUserService userService)
+        public femaleController(IFemaleMeasureService femaleMeasureService, IUserService userService)
         {
             _femaleMeasureService = femaleMeasureService;
-            _unitOfWork = unitOfWork;
             _userService = userService;
         }
 
