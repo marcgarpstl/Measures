@@ -27,17 +27,19 @@ namespace Measures.Controllers
 
             if (id == Guid.Empty) return BadRequest("Id is empty");
 
-            var user = await _userService.GetById(id);
+            var female = await _femaleMeasureService.GetFemaleMeasureAsync(id);
 
-            if (user.Female == null) return BadRequest("No measures has been added");
+            if (female == null) return BadRequest("Female Id not found");
 
-            return Ok(user.Female);
+            return Ok(female);
+
+
         }
 
         [HttpPut("add-measures")]
-        public async Task<IActionResult> AddFemaleMeasures(Guid id, SetFemaleMeasuresDto female, CancellationToken ct = default)
+        public async Task<IActionResult> AddFemaleMeasures(Guid id, SetFemaleMeasuresDto femaleDto, CancellationToken ct = default)
         {
-            if (female == null) throw new ArgumentNullException(nameof(female));
+            if (femaleDto == null) throw new ArgumentNullException(nameof(femaleDto));
 
             if (id == Guid.Empty) return BadRequest("No user found.");
 
@@ -45,9 +47,7 @@ namespace Measures.Controllers
             {
                 var user = await _userService.GetById(id, ct);
 
-                var userFemale = await _femaleMeasureService.AddFemaleMeasureAsync(female, ct);
-
-                user.Female = userFemale;
+                user.Female = await _femaleMeasureService.AddFemaleMeasureAsync(femaleDto, ct);
 
                 return Ok("Female measures added.");
             }

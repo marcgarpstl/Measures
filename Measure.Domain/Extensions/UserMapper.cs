@@ -26,7 +26,6 @@ namespace Measure.Domain.Extensions
         
         internal static User ToUser(this SetUserDto userDto) =>
             new User(
-                userDto.Id,
                 userDto.FirstName,
                 userDto.LastName,
                 userDto.Email,

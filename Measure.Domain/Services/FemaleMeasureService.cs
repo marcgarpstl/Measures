@@ -33,7 +33,7 @@ namespace Measure.Domain.Services
             return addMeasures;
         }
 
-        public Task DeleteFemaleMeasureAsync(Guid id, CancellationToken ct = default)
+        public Task<SetFemaleMeasuresDto> DeleteFemaleMeasureAsync(Guid id, CancellationToken ct = default)
         {
             throw new NotImplementedException();
         }
@@ -48,7 +48,12 @@ namespace Measure.Domain.Services
 
             else if (ct.IsCancellationRequested) throw new InvalidOperationException();
 
-            return userFemale.Female.ToFemaleDto();
+            return userFemale.ToFemaleDto();
+        }
+
+        Task IFemaleMeasureService.DeleteFemaleMeasureAsync(Guid id, CancellationToken ct)
+        {
+            throw new NotImplementedException();
         }
     }
 }

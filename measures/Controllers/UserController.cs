@@ -27,6 +27,8 @@ namespace Measures.Controllers
 
             var user = await _userService.GetById(id);
 
+
+
             return Ok(user);
         }
 

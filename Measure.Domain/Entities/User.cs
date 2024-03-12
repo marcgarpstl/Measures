@@ -21,9 +21,8 @@ namespace Measure.Domain.Entities
         public MaleMeasures Male { get; set; }
         public FemaleMeasures Female { get; set; }
 
-        public User(Guid id, string firstName, string lastName, string email, string password, string userName)
+        public User(string firstName, string lastName, string email, string password, string userName)
         {
-            Id = id;
             FirstName = firstName;
             LastName = lastName;
             Email = email;

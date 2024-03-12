@@ -43,7 +43,7 @@ namespace Measure.Infrastructure.Repository
 
         public async Task DeleteUserAsync(Guid id)
         {
-            if (id ==  Guid.Empty) throw new ArgumentNullException("id is null");
+            if (id ==  Guid.Empty) throw new ArgumentNullException("Id is null");
 
             var user = await GetUserByGuidAsync(id);
             if (user == null)

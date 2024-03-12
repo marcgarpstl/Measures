@@ -1,6 +1,7 @@
 ﻿using Measure.Domain.Entities;
 using Measure.Domain.Repositories;
 using Measure.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,11 @@ namespace Measure.Infrastructure.Repository
             throw new NotImplementedException();
         }
 
-        public Task<User> GetFemaleMeasuresByIdAsync(Guid id, CancellationToken ct = default)
+        public Task<FemaleMeasures> GetFemaleMeasuresByIdAsync(Guid id, CancellationToken ct = default)
         {
-            throw new NotImplementedException();
+            if (id == Guid.Empty) throw new ArgumentNullException(nameof(id));
+
+            return _context.FemaleMeasures.FirstOrDefaultAsync(f => f.UserId == id);
         }
 
         public Task UpdateMeasuresAsync(FemaleMeasures female)

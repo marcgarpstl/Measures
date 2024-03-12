@@ -9,7 +9,7 @@ namespace Measure.Domain.Repositories
 {
     public interface IFemaleMeasureRepository
     {
-        Task <User> GetFemaleMeasuresByIdAsync(Guid id, CancellationToken ct = default);
+        Task <FemaleMeasures> GetFemaleMeasuresByIdAsync(Guid id, CancellationToken ct = default);
         Task AddMeasureFemaleAsync(FemaleMeasures female, CancellationToken ct = default);
         Task UpdateMeasuresAsync(FemaleMeasures female);
         Task DeleteMeasureFemaleAsync(User user);
