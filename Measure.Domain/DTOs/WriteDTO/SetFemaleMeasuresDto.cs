@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Measure.Domain.DTOs.WriteDTO
 {
-    public record SetFemaleMeasuresDto(Guid UserId,
-        int Bust,
+    public record SetFemaleMeasuresDto(int Bust,
         int Waist,
         int Hip,
-        int NapeWaist,
-        int FrontRise,
+        int ArmLenght,
+        int LegLenght,
         int UnderBust,
-        int MidShoulderBust,
-        int ShoulderLength,
-        int Wrist,
-        int Biceps,
-        int CrotchAnkle,
-        int Thigh,
-        int FootLength);
+        int BreastVolume,
+        int FootLenght,
+        int FootWitdh,
+        int Calf,
+        int HandCircumference,
+        int HeadCircumference,
+        int FingerCircumference);
+        
 
 }

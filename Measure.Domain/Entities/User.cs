@@ -17,10 +17,9 @@ namespace Measure.Domain.Entities
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
-        public DateTimeOffset Created {  get; set; }
-
-        public MaleMeasures? Male {  get; set; }
-        public FemaleMeasures? Female { get; set; }
+        public DateTimeOffset Created { get; set; }
+        public MaleMeasures Male { get; set; }
+        public FemaleMeasures Female { get; set; }
 
         public User(string firstName, string lastName, string email, string password, string userName)
         {
@@ -29,6 +28,8 @@ namespace Measure.Domain.Entities
             Email = email;
             Password = password;
             UserName = userName;
+            Female = new FemaleMeasures(Id);
+            Male = new MaleMeasures(Id);
             Created = DateTimeOffset.UtcNow;
         }
     }

@@ -4,6 +4,7 @@ using Measure.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Measure.Infrastructure.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240205143143_UpdateFemaleTable")]
+    partial class UpdateFemaleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +27,8 @@ namespace Measure.Infrastructure.Migrations
 
             modelBuilder.Entity("Measure.Domain.Entities.FemaleMeasures", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("FemaleMeasureId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ArmLenght")
@@ -63,10 +67,16 @@ namespace Measure.Infrastructure.Migrations
                     b.Property<int>("UnderBust")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<int>("Waist")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId");
+                    b.HasKey("FemaleMeasureId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("FemaleMeasures");
                 });
@@ -145,20 +155,24 @@ namespace Measure.Infrastructure.Migrations
 
             modelBuilder.Entity("Measure.Domain.Entities.FemaleMeasures", b =>
                 {
-                    b.HasOne("Measure.Domain.Entities.User", null)
+                    b.HasOne("Measure.Domain.Entities.User", "User")
                         .WithOne("Female")
                         .HasForeignKey("Measure.Domain.Entities.FemaleMeasures", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Measure.Domain.Entities.MaleMeasures", b =>
                 {
-                    b.HasOne("Measure.Domain.Entities.User", null)
+                    b.HasOne("Measure.Domain.Entities.User", "User")
                         .WithOne("Male")
                         .HasForeignKey("Measure.Domain.Entities.MaleMeasures", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Measure.Domain.Entities.User", b =>

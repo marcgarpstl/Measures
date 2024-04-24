@@ -13,14 +13,50 @@ namespace Measure.Domain.Extensions
 {
     internal static class MeasuresMapper
     {
-        internal static ReadFemaleMeasuresDto ToReadFemaleDto(this ReadFemaleMeasuresDto rfd) =>
-            new ReadFemaleMeasuresDto(rfd.Id, rfd.UserId, rfd.Bust, rfd.Waist, rfd.Hip, rfd.NapeWaist, rfd.FrontRise, rfd.UnderBust, rfd.MidShoulderBust, rfd.ShoulderLength, rfd.Wrist, rfd.Biceps, rfd.CrotchAnkle, rfd.Thigh, rfd.FootLength);
+        internal static ReadFemaleMeasuresDto ToFemaleDto(this FemaleMeasures rfd) =>
+            new ReadFemaleMeasuresDto(
+                rfd.UserId,
+                rfd.Bust,
+                rfd.Waist,
+                rfd.Hip,
+                rfd.ArmLenght, 
+                rfd.LegLenght, 
+                rfd.UnderBust, 
+                rfd.BreastVolume, 
+                rfd.FootLength, 
+                rfd.FootWidth, 
+                rfd.Calf, 
+                rfd.HandCircumference, 
+                rfd.HeadCircumference, 
+                rfd.FingerCircumference);
 
         internal static FemaleMeasures ToFemaleMeasures(this SetFemaleMeasuresDto sfd) =>
-            new FemaleMeasures(sfd.UserId);
+            new FemaleMeasures(
+                sfd.Bust,
+                sfd.Waist,
+                sfd.Hip,
+                sfd.ArmLenght,
+                sfd.LegLenght,
+                sfd.UnderBust,
+                sfd.BreastVolume,
+                sfd.FootLenght,
+                sfd.FootWitdh,
+                sfd.Calf,
+                sfd.HandCircumference,
+                sfd.HeadCircumference,
+                sfd.FingerCircumference);
 
-        internal static ReadMaleMeasuresDto ToReadMaleDto(this ReadMaleMeasuresDto rmd) =>
-            new ReadMaleMeasuresDto(rmd.Id, rmd.UserId, rmd.Chest, rmd.Waist, rmd.Neck, rmd.ArmLenght, rmd.Calf, rmd.Inseam, rmd.FootLength);
+        internal static ReadMaleMeasuresDto ToMaleDto(this ReadMaleMeasuresDto rmd) =>
+            new ReadMaleMeasuresDto(
+                rmd.Id,
+                rmd.UserId, 
+                rmd.Chest, 
+                rmd.Waist,
+                rmd.Neck,
+                rmd.ArmLenght,
+                rmd.Calf,
+                rmd.Inseam,
+                rmd.FootLength);
 
         internal static MaleMeasures ToMaleMeasures(this SetMaleMeasuresDto smd) =>
             new MaleMeasures(smd.UserId);

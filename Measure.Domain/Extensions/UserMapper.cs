@@ -12,7 +12,7 @@ namespace Measure.Domain.Extensions
 {
     internal static class UserMapper
     {
-        internal static ReadUserDto ToUserDo(this User user) =>
+        internal static ReadUserDto ToUserDto(this User user) =>
             new ReadUserDto(
                 user.Id,
                 user.FirstName,

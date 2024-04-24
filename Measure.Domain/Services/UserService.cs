@@ -16,16 +16,18 @@ namespace Measure.Domain.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IFemaleMeasureRepository _faemaleMeasureRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, IFemaleMeasureRepository femaleMeasureRepository)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
+            _faemaleMeasureRepository = femaleMeasureRepository;
         }
         public async Task AddUserAsync(SetUserDto user, CancellationToken ct = default)
         {
-            if (user == null) throw new ArgumentNullException();
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
             User createUser = user.ToUser();
             await _userRepository.AddUserAsync(createUser, ct);
@@ -73,12 +75,14 @@ namespace Measure.Domain.Services
             if (id == Guid.Empty) throw new ArgumentNullException("Id cannot be null");
 
             var user = await _userRepository.GetUserByGuidAsync(id);
+            user.Female = await _faemaleMeasureRepository.GetFemaleMeasuresByIdAsync(id);
 
             if (user == null) throw new ArgumentNullException("Not found");
 
+
             else if (ct.IsCancellationRequested) throw new OperationCanceledException();
 
-            return user.ToUserDo();
+            return user.ToUserDto();
         }
     }
 }
