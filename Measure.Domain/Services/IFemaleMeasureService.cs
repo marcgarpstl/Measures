@@ -12,7 +12,7 @@ namespace Measure.Domain.Services
     public interface IFemaleMeasureService
     {
         Task<ReadFemaleMeasuresDto> GetFemaleMeasureAsync(Guid id, CancellationToken ct = default);
-        Task<FemaleMeasures> AddFemaleMeasureAsync(SetFemaleMeasuresDto femaleMeasures, CancellationToken ct = default);
+        Task AddFemaleMeasureAsync(Guid id, SetFemaleMeasuresDto femaleMeasures, CancellationToken ct = default);
         Task DeleteFemaleMeasureAsync(Guid id, CancellationToken ct = default);
     }
 }

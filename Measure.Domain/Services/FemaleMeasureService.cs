@@ -15,22 +15,29 @@ namespace Measure.Domain.Services
     {
         private readonly IFemaleMeasureRepository _femaleRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public FemaleMeasureService(IFemaleMeasureRepository repository, IUnitOfWork unitOfWork)
+        private readonly IUserRepository _userRepository;
+        public FemaleMeasureService(IFemaleMeasureRepository repository, IUnitOfWork unitOfWork, IUserRepository userRepository)
         {
             _femaleRepository = repository;
             _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
         }
 
-        public async Task<FemaleMeasures> AddFemaleMeasureAsync(SetFemaleMeasuresDto femaleMeasures, CancellationToken ct = default)
+        public async Task AddFemaleMeasureAsync(Guid id, SetFemaleMeasuresDto femaleMeasures, CancellationToken ct = default)
         {
             if (femaleMeasures == null) throw new ArgumentNullException(nameof(femaleMeasures));
 
-            FemaleMeasures addMeasures = femaleMeasures.ToFemaleMeasures();
+            var user = await _userRepository.GetUserByGuidAsync(id);
 
-            await _femaleRepository.AddMeasureFemaleAsync(addMeasures, ct);
+            var female = await _femaleRepository.GetFemaleMeasuresByIdAsync(id);
+
+            user.Female = female;
+
+            user.Female = femaleMeasures.ToFemaleMeasures();
+
+            await _femaleRepository.AddMeasureFemaleAsync(user.Female, ct);
             await _unitOfWork.SaveChangesAsync(ct);
 
-            return addMeasures;
         }
 
         public Task<SetFemaleMeasuresDto> DeleteFemaleMeasureAsync(Guid id, CancellationToken ct = default)

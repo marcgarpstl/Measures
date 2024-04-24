@@ -11,12 +11,10 @@ namespace Measures.Controllers
     public class femaleController : ControllerBase
     {
         private readonly IFemaleMeasureService _femaleMeasureService;
-        private IUserService _userService;
 
         public femaleController(IFemaleMeasureService femaleMeasureService, IUserService userService)
         {
             _femaleMeasureService = femaleMeasureService;
-            _userService = userService;
         }
 
         [HttpGet("get-measures")]
@@ -30,8 +28,6 @@ namespace Measures.Controllers
             if (female == null) return BadRequest("Female Id not found");
 
             return Ok(female);
-
-
         }
 
         [HttpPut("add-measures")]
@@ -43,9 +39,7 @@ namespace Measures.Controllers
 
             try
             {
-                var user = await _userService.GetById(id, ct);
-
-                user.Female = await _femaleMeasureService.AddFemaleMeasureAsync(femaleDto, ct);
+                await _femaleMeasureService.AddFemaleMeasureAsync(id, femaleDto, ct);
 
                 return Ok("Female measures added.");
             }
