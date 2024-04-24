@@ -50,7 +50,6 @@ namespace Measure.Domain.Entities
         }
         public FemaleMeasures(int bust, int waist, int hip, int armLenght, int legLenght, int underBust, int breastVolume, int footLength, int footWidth, int calf, int handCircumference, int headCircumference, int fingerCircumference)
         {
-            UserId = UserId;
             Bust = bust;
             Waist = waist;
             Hip = hip;
