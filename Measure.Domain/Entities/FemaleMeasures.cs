@@ -25,7 +25,7 @@ namespace Measure.Domain.Entities
         /// BH
         /// </summary>
         public int UnderBust { get; set; } // Byst under bröst 
-        public int BreastVolume { get; set; } // Bröstomgång
+        public int BreastVolume { get; set; } // Bröstomfång
         /// <summary>
         /// Socks and Shoes
         /// </summary>

@@ -30,7 +30,7 @@ namespace Measures.Controllers
             return Ok(female);
         }
 
-        [HttpPut("add-measures")]
+        [HttpPut("update-measures")]
         public async Task<IActionResult> AddFemaleMeasures(Guid id, SetFemaleMeasuresDto femaleDto, CancellationToken ct = default)
         {
             if (femaleDto == null) throw new ArgumentNullException(nameof(femaleDto));
@@ -39,7 +39,7 @@ namespace Measures.Controllers
 
             try
             {
-                await _femaleMeasureService.AddFemaleMeasureAsync(id, femaleDto, ct);
+                await _femaleMeasureService.UpdateFemaleMeasureAsync(id, femaleDto, ct);
 
                 return Ok("Female measures added.");
             }
@@ -56,12 +56,6 @@ namespace Measures.Controllers
                 return StatusCode(500);
             }
             
-        }
-
-        [HttpPut("update-measures")]
-        public async Task<IActionResult> UpdateFemaleMeasures()
-        {
-            return Ok();
         }
 
         [HttpDelete("delete-measures")]
