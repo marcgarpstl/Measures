@@ -13,7 +13,4 @@ namespace Measure.Domain.DTOs.ReadDTO
         string Username,
         string Email,
         string Password)
-    {
-
-    }
 }
