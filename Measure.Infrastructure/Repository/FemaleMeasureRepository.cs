@@ -18,7 +18,7 @@ namespace Measure.Infrastructure.Repository
         {
             _context = context;
         }
-        public async Task AddMeasureFemaleAsync(FemaleMeasures female, CancellationToken ct = default)
+        public async Task UpdateMeasureFemaleAsync(FemaleMeasures female, CancellationToken ct = default)
         {
             if (female == null) throw new ArgumentNullException(nameof(female));
 
@@ -35,11 +35,6 @@ namespace Measure.Infrastructure.Repository
             if (id == Guid.Empty) throw new ArgumentNullException(nameof(id));
 
             return _context.FemaleMeasures.FirstOrDefaultAsync(f => f.UserId == id);
-        }
-
-        public Task UpdateMeasuresAsync(FemaleMeasures female)
-        {
-            throw new NotImplementedException();
         }
     }
 }
