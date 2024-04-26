@@ -25,6 +25,16 @@ namespace Measure.Domain.Services
             _unitOfWork = unitOfWork;
             _faemaleMeasureRepository = femaleMeasureRepository;
         }
+        public async Task<IEnumerable<ReadUserCridentialsDto>> GetAll(CancellationToken ct)
+        {
+            IEnumerable<User> users = await _userRepository.GetAllAsync(ct);
+
+            if (ct.IsCancellationRequested)
+            {
+                throw new OperationCanceledException();
+            }
+            return users.ToList().ToUsersDtoList();
+        }
         public async Task AddUserAsync(SetUserDto user, CancellationToken ct = default)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
