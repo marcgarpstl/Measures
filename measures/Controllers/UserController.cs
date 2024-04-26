@@ -20,6 +20,25 @@ namespace Measures.Controllers
             _userValidator = userValidator;
         }
 
+        [HttpGet("get-all-users")]
+        public async Task<IActionResult> GetAllUsers(CancellationToken ct = default)
+        {
+            try
+            {
+                var users = await _userService.GetAll(ct);
+
+                return Ok(users);
+            }
+            catch (OperationCanceledException) when (ct.IsCancellationRequested)
+            {
+                return BadRequest();
+            }
+            catch(Exception)
+            {
+                return StatusCode(500);
+            }
+        }
+
         [HttpGet("get-user")]
         public async Task<IActionResult> GetUser(Guid id, CancellationToken ct = default)
         {

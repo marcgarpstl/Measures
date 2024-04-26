@@ -1,6 +1,7 @@
 ﻿using Measure.Domain.Entities;
 using Measure.Domain.Repositories;
 using Measure.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace Measure.Infrastructure.Repository
         public UserRepository(IUserDbContext context)
         {
             this._context = context;
+        }
+        public async Task<IEnumerable<User>> GetAllAsync(CancellationToken ct = default)
+        {
+            return await _context.Users.ToListAsync(ct);
         }
         public async Task AddUserAsync(User user, CancellationToken ct = default)
         {
