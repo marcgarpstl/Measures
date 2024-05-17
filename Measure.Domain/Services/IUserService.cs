@@ -10,6 +10,7 @@ namespace Measure.Domain.Services
 {
     public interface IUserService
     {
+        Task<ReadUserDto> GetByAuthId(string authId, CancellationToken ct = default);
         Task<IEnumerable<ReadUserCridentialsDto>>GetAll(CancellationToken ct = default);
         Task<ReadUserDto> GetById(Guid id, CancellationToken ct = default);
         Task AddUserAsync(SetUserDto user, CancellationToken ct = default);

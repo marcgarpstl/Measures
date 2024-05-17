@@ -13,6 +13,7 @@ namespace Measure.Domain.Extensions
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IFemaleMeasureService, FemaleMeasureService>();
             services.AddTransient<IUserValidator, UserValidator>();
+            services.AddTransient<ITokenHandlerService, TokenHandlerService>();
             return services;
         }
     }

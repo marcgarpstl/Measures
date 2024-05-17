@@ -1,10 +1,10 @@
 ﻿using Measure.Domain.Extensions;
-using Measure.Infrastructure.Context;
+using Measure.Infrastructure.Authentication.Configuration;
 using Measure.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Identity.Client;
+using System.Configuration;
+
+
 
 namespace Measures
 {
@@ -24,6 +24,9 @@ namespace Measures
             services.AddSwaggerGen();
             services.AddDomainServices();
             services.AddInfrastructureServices(connectionString);
+            services.AddCors();
+            services.AddAuthServices(_configuration.GetSection(nameof(ManagementToken)));
+
         }
         public void Configure(IApplicationBuilder app, IHostEnvironment host) 
         {
@@ -35,6 +38,14 @@ namespace Measures
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Measure.WepApi");
                 });
             }
+
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .WithHeaders("Authorization", "Content-Type");
+            });
 
             app.UseHttpsRedirection();
             app.UseAuthorization();

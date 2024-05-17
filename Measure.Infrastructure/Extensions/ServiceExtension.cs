@@ -1,5 +1,6 @@
 ﻿using Measure.Domain.Repositories;
 using Measure.Domain.Services;
+using Measure.Infrastructure.Authentication;
 using Measure.Infrastructure.Context;
 using Measure.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,11 @@ namespace Measure.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<IUserDbContext, UserDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<ITokenHandlerService, TokenHandlerService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IFemaleMeasureRepository, FemaleMeasureRepository>();
+            services.AddTransient<IAutheticationService, AuthenticationService>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             return services;
         }

@@ -9,12 +9,12 @@ namespace Measures.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class userController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IUserValidator _userValidator;
 
-        public userController(IUserService userService, IUserValidator userValidator)
+        public UserController(IUserService userService, IUserValidator userValidator)
         {
             _userService = userService;
             _userValidator = userValidator;

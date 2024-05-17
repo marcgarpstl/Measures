@@ -9,6 +9,7 @@ namespace Measure.Domain.Repositories
 {
     public interface IUserRepository
     {
+        Task<User> GetByAuthIdAsync(string authId, CancellationToken ct = default);
         Task<IEnumerable<User>> GetAllAsync(CancellationToken ct = default);
         Task <User> GetUserByGuidAsync (Guid id, CancellationToken ct = default);
         Task AddUserAsync(User user, CancellationToken ct = default);

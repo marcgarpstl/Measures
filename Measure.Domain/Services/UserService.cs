@@ -1,6 +1,7 @@
 ﻿using Measure.Domain.DTOs.ReadDTO;
 using Measure.Domain.DTOs.WriteDTO;
 using Measure.Domain.Entities;
+using Measure.Domain.Exceptions;
 using Measure.Domain.Extensions;
 using Measure.Domain.Repositories;
 using Measure.Domain.Validators;
@@ -91,6 +92,18 @@ namespace Measure.Domain.Services
 
 
             else if (ct.IsCancellationRequested) throw new OperationCanceledException();
+
+            return user.ToUserDto();
+        }
+
+        public async Task<ReadUserDto> GetByAuthId(string authId, CancellationToken ct = default)
+        {
+            if (string.IsNullOrEmpty(authId)) throw new ArgumentNullException("Id is empty");
+            if (ct.IsCancellationRequested) throw new OperationCanceledException("Cancelled");
+
+            var user = await _userRepository.GetByAuthIdAsync(authId);
+
+            if (user == null) throw new NotFoundException("No user found");
 
             return user.ToUserDto();
         }

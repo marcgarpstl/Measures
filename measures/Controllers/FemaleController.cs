@@ -8,11 +8,11 @@ namespace Measures.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class femaleController : ControllerBase
+    public class FemaleController : ControllerBase
     {
         private readonly IFemaleMeasureService _femaleMeasureService;
 
-        public femaleController(IFemaleMeasureService femaleMeasureService, IUserService userService)
+        public FemaleController(IFemaleMeasureService femaleMeasureService, IUserService userService)
         {
             _femaleMeasureService = femaleMeasureService;
         }

@@ -6,8 +6,6 @@ namespace measures
         public static void Main(string[] args)
         {
             var builder = CreateHostBuilder(args).Build();
-
-
             builder.Run();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>

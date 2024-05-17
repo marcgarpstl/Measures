@@ -2,6 +2,7 @@
 using Measure.Domain.Repositories;
 using Measure.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,11 @@ namespace Measure.Infrastructure.Repository
             if(id == Guid.Empty) throw new ArgumentNullException(nameof(id));
 
             return _context.Users.FirstOrDefault(u  => u.Id == id);
+        }
+
+        public async Task<User> GetByAuthIdAsync(string authId, CancellationToken ct = default)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.AuthId == authId);
         }
     }
 }
