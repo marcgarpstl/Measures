@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+﻿using Measure.Domain.DTOs.WriteDTO;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace Measure.Domain.Services
     {
         Task AccessTokenToHeader();
         Task<string> GetAccessTokenAsync();
+        Task<string> AddAuthUserAsync(SetUserDto setUser);
+        Task DeleteAuthUserAsync(string authId);
     }
 }

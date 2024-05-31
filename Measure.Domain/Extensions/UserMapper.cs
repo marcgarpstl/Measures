@@ -2,6 +2,7 @@
 using Measure.Domain.DTOs.WriteDTO;
 using Measure.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,16 @@ namespace Measure.Domain.Extensions
                 userDto.Email,
                 userDto.Password,
                 userDto.UserName
+                );
+
+        internal static SetUserDto ToSetUser(this SetUserDto dto, string authId) =>
+            new SetUserDto(
+                authId,
+                dto.UserName,
+                dto.FirstName,
+                dto.LastName,
+                dto.Email,
+                dto.Password
                 );
     }
 }

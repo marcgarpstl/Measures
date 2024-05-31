@@ -13,11 +13,13 @@ namespace Measures.Controllers
     {
         private readonly IUserService _userService;
         private readonly IUserValidator _userValidator;
+        private readonly IAdministrationService _administrationService;
 
-        public UserController(IUserService userService, IUserValidator userValidator)
+        public UserController(IUserService userService, IUserValidator userValidator, IAdministrationService administrationService)
         {
             _userService = userService;
             _userValidator = userValidator;
+            _administrationService = administrationService;
         }
 
         [HttpGet("get-all-users")]
@@ -62,7 +64,7 @@ namespace Measures.Controllers
 
                 if (validationResult != ValidationResult.Success) { return BadRequest(validationResult); }
 
-                await _userService.AddUserAsync(userDto, ct);
+                await _administrationService.AddAuthUser(userDto, ct);
 
                 return Ok("User added successfully");
             }

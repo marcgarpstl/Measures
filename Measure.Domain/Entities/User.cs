@@ -20,7 +20,7 @@ namespace Measure.Domain.Entities
         public DateTimeOffset Created { get; set; }
         public MaleMeasures Male { get; set; }
         public FemaleMeasures Female { get; set; }
-        public string AuthId { get; set; } = string.Empty;
+        public string AuthId { get; set; }
 
         public User(string firstName, string lastName, string email, string password, string userName)
         {
