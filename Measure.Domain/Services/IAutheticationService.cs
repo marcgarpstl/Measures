@@ -9,6 +9,7 @@ namespace Measure.Domain.Services
 {
     public interface IAutheticationService
     {
+        Task AccessTokenToHeader();
         Task<string> GetAccessTokenAsync();
     }
 }

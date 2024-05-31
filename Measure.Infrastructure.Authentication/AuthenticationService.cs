@@ -8,6 +8,12 @@ namespace Measure.Infrastructure.Authentication
         private const string baseUrl = "";
         private readonly string authDefaultConnection = "Username-Password-Authentication";
         private readonly ManagementToken _managementToken;
+
+        public Task AccessTokenToHeader()
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<string> GetAccessTokenAsync()
         {
             throw new NotImplementedException();
